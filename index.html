@@ -18,11 +18,12 @@
     <script>
 
     $(document).ready(function(){
+      
       $("#previous").click(function(e){
           e.preventDefault();
 
         $.ajax({type: "GET",
-                url: "http://192.168.0.198:4242/previous",
+                url: "http://192.168.1.117:4242/previous",
                 data: null,
                 success:function(result){
           
@@ -33,7 +34,7 @@
           e.preventDefault();
 
         $.ajax({type: "GET",
-                url: "http://192.168.0.198:4242/next",
+                url: "http://192.168.1.117:4242/next",
                 data: null,
                 success:function(result){
           
@@ -56,11 +57,11 @@
 
     <div class="container">
       <br><br><br>
-        <button id="next" type="button" class="btn btn-primary btn-lg btn-block">上一步</button>
+        <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">上一步</button>
     </div>
     <div class="container">
       <br><br><br>
-        <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
+        <button id="next" type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
     </div>
 
 
