@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI Pro 101 Template</title>
+    <title>网页Unity通信测试</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Loading Bootstrap -->
@@ -18,7 +18,7 @@
     <script>
 
     $(document).ready(function(){
-      $("#button").click(function(e){
+      $("#previous").click(function(e){
           e.preventDefault();
 
         $.ajax({type: "GET",
@@ -28,6 +28,18 @@
           
         }});
       });
+
+      $("#next").click(function(e){
+          e.preventDefault();
+
+        $.ajax({type: "GET",
+                url: "http://127.0.0.1:8080/chracters",
+                data: null,
+                success:function(result){
+          
+        }});
+      });
+      
     });
 
 
@@ -43,10 +55,12 @@
   <body>
 
     <div class="container">
-    <dl></dl>
-    
-        <button id="button" type="button" class="btn btn-primary btn-lg btn-block">GO</button>
-
+      <br><br><br>
+        <button id="next" type="button" class="btn btn-primary btn-lg btn-block">上一步</button>
+    </div>
+    <div class="container">
+      <br><br><br>
+        <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
     </div>
 
 
