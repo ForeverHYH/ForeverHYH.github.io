@@ -23,7 +23,7 @@
           e.preventDefault();
 
         $.ajax({type: "GET",
-                url: "http://192.168.0.109:4242/previous",
+                url: "http://192.168.1.103:4242/previous",
                 data: null,
                 success:function(result){
           
@@ -34,7 +34,29 @@
           e.preventDefault();
 
         $.ajax({type: "GET",
-                url: "http://192.168.0.109:4242/next",
+                url: "http://192.168.1.103:4242/next",
+                data: null,
+                success:function(result){
+          
+        }});
+      });
+
+      $("#left").click(function(e){
+          e.preventDefault();
+
+        $.ajax({type: "GET",
+                url: "http://192.168.1.103:4242/left",
+                data: null,
+                success:function(result){
+          
+        }});
+      });
+
+      $("#right").click(function(e){
+          e.preventDefault();
+
+        $.ajax({type: "GET",
+                url: "http://192.168.1.103:4242/right",
                 data: null,
                 success:function(result){
           
@@ -60,7 +82,12 @@
         <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">上一步</button>
     </div>
     <div class="container">
-      <br><br><br>
+      <br>
+        <button id="left" type="button" class="btn btn-primary btn-lg">左拐</button>
+        <button id="right" type="button" class="btn btn-primary btn-lg ">右拐</button>
+    </div>
+    <div class="container">
+      <br>
         <button id="next" type="button" class="btn btn-primary btn-lg btn-block">下一步</button>
     </div>
 
