@@ -53,7 +53,7 @@ function orientationHandler(event){
     if (current != preSter) {
         preSter = current;
         $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/ster?angle="+parseInt(preSter)
+            url: "http://192.168.1.103:4242/steer?angle="+current
         });
     }
 
