@@ -20,25 +20,28 @@
 
 var timerID;
 var preSter = -1000;
-function window_onload()
+window.onload =  function()
 {
-    timerID = setInterval(function(){
-      $(document).ready(function() {
-
+    $("#next").mousedown(function(event) {
         $.ajax({type: "GET",
-                url: "http://192.168.0.103:4242/ster?angle="+parseInt(document.getElementById("xg").innerHTML) ,
-                data: null,
-                success:function(result){
-          
-        }});
+            url: "http://192.168.1.103:4242/speedOn"
+        });
+    });
+    $("#next").mouseup(function(event) {
         $.ajax({type: "GET",
-                url: "http://192.168.0.103:4242/previous?y="+parseInt(document.getElementById("yg").innerHTML),
-                data: null,
-                success:function(result){
-          
-        }});
-      });
-    },3000); 
+            url: "http://192.168.1.103:4242/speedOff"
+        });
+    });
+    $("#previous").mousedown(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/backOn"
+        });
+    });
+    $("#previous").mouseup(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/backOff"
+        });
+    });
 }
 
 
@@ -101,52 +104,26 @@ if (window.DeviceOrientationEvent){
 </head>  
   
 <body >  
-  <p>  
-        阁下：<span id="alpha">0</span>  
-    </p>  
+    <div class="container">
+      <br><br><br>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="next" type="button" class="btn btn-primary btn-lg btn-block">前进</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">后退</button>
+        </div>
+      </div>
+    </div>   
     <p>  
         前后：<span id="beta">0</span>  
     </p>  
     <p>  
         扭转：<span id="gamma">0</span>  
     </p>  
-    <p>  
-        指北针指向：<span id="heading">0</span>度  
-    </p>  
-    <p>  
-        指北针精度：<span id="accuracy">0</span>度  
-    </p>  
-    <hr />  
-    <p>  
-        x轴加快度：<span id="x">0</span>米每二次方秒  
-    </p>  
-    <p>  
-        y轴加快度：<span id="y">0</span>米每二次方秒  
-    </p>  
-    <p>  
-        z轴加快度：<span id="z">0</span>米每二次方秒  
-    </p>  
-    <hr />  
-    <p>  
-        x轴加快度(推敲重力加快度)：<span id="xg">0</span>米每二次方秒  
-    </p>  
-    <p>  
-        y轴加快度(推敲重力加快度)：<span id="yg">0</span>米每二次方秒  
-    </p>  
-    <p>  
-        z轴加快度(推敲重力加快度)：<span id="zg">0</span>米每二次方秒  
-    </p>  
-    <hr />  
-    <p>  
-        阁下扭转速度：<span id="Ralpha">0</span>度每秒  
-    </p>  
-    <p>  
-        前后扭转速度：<span id="Rbeta">0</span>度每秒  
-    </p>  
-    <p>  
-        扭转速度：<span id="Rgamma">0</span>度每秒  
-    </p>  
-    <hr />  
     <p>  
         前次收到通知的间隔：<span id="interval">0</span>毫秒  
     </p>  
