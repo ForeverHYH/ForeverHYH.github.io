@@ -21,6 +21,8 @@
 var timerID;
 var preSter = -1000;
 var preSterGama = -1000;
+var current = -1000;
+var currentGamma = -1000;
 window.onload =  function()
 {
     $("#next").mousedown(function(event) {
@@ -43,6 +45,17 @@ window.onload =  function()
             url: "http://192.168.1.103:4242/backOff"
         });
     });
+
+    setInterval(function(){
+        if (current != preSter || currentGamma != preSterGama) {
+            preSter = current;
+            preSterGama = currentGamma;
+            $.ajax({type: "GET",
+                url: "http://192.168.1.103:4242/steer?angle="+ current + "&throttle=" + currentGamma
+            });
+        }
+    }
+    ,33)
 }
 
 
@@ -52,21 +65,9 @@ function orientationHandler(event){
     document.getElementById("gamma").innerHTML = event.gamma;  
     document.getElementById("heading").innerHTML = event.webkitCompassHeading;  
     document.getElementById("accuracy").innerHTML = event.webkitCompassAccuracy;
-
-    var current = event.beta;
-    var currentGamma = event.gamma;
-    setTimeout(function(){
-        if (current != preSter || currentGamma != preSterGama) {
-            preSter = current;
-            preSterGama = currentGamma;
-
-            $.ajax({type: "GET",
-                url: "http://192.168.1.103:4242/steer?angle="+ current + "&throttle=" + currentGamma
-            });
-        }
-    }
-    ,33)
-    }
+    current = event.beta;
+    currentGamma = event.gamma;
+    
     
 }  
   
