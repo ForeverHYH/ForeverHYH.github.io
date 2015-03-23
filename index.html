@@ -53,25 +53,21 @@ function orientationHandler(event){
     document.getElementById("heading").innerHTML = event.webkitCompassHeading;  
     document.getElementById("accuracy").innerHTML = event.webkitCompassAccuracy;
 
-    var current = parseInt(event.beta);
-    var currentGamma = parseInt(event.gamma);
-    if (current != preSter || currentGamma != preSterGama) {
-        preSter = current;
-        preSterGama = currentGamma;
-        $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/steer?angle="+ current + "&throttle=" + currentGamma
-        });
+    var current = event.beta;
+    var currentGamma = event.gamma;
+    setTimeout(function(){
+        if (current != preSter || currentGamma != preSterGama) {
+            preSter = current;
+            preSterGama = currentGamma;
+
+            $.ajax({type: "GET",
+                url: "http://192.168.1.103:4242/steer?angle="+ current + "&throttle=" + currentGamma
+            });
+        }
     }
-
-    // $(document).ready(function() {
-
-    //     $.ajax({type: "GET",
-    //             url: "http://192.168.0.103:4242/ster?angle="+parseInt(document.getElementById("xg").innerHTML) ,
-    //             data: null,
-    //             success:function(result){
-          
-    //     }});
-    //   });  
+    ,33)
+    }
+    
 }  
   
   
@@ -122,11 +118,8 @@ if (window.DeviceOrientationEvent){
       </div>
     </div>   
     <p>
-
-
-阁下：<span id="alpha">0</span>
-
-</p>
+        阁下：<span id="alpha">0</span>
+    </p>
 
 <p>
 
