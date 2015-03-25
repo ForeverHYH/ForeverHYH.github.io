@@ -23,6 +23,7 @@ var preSter = -1000;
 var preSterGama = -1000;
 var current = -1000;
 var currentGamma = -1000;
+
 window.onload =  function()
 {
     $("#next").mousedown(function(event) {
@@ -43,6 +44,37 @@ window.onload =  function()
     $("#previous").mouseup(function(event) {
         $.ajax({type: "GET",
             url: "http://192.168.1.103:4242/backOff"
+        });
+    });
+
+    $("#one").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/speedOne"
+        });
+    });
+    $("#two").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/speedTwo"
+        });
+    });
+    $("#three").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/speedThree"
+        });
+    });
+    $("#four").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/speedFour"
+        });
+    });
+    $("#five").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/speedFive"
+        });
+    });
+    $("#back").click(function(event) {
+        $.ajax({type: "GET",
+            url: "http://192.168.1.103:4242/back"
         });
     });
 
@@ -108,6 +140,43 @@ if (window.DeviceOrientationEvent){
       <br><br><br>
       <div class="row">
         <div class="col-sm-3">
+          <button id="one" type="button" class="btn btn-primary btn-lg btn-block">1档</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="two" type="button" class="btn btn-primary btn-lg btn-block">2档</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="three" type="button" class="btn btn-primary btn-lg btn-block">3档</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="four" type="button" class="btn btn-primary btn-lg btn-block">4档</button>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="five" type="button" class="btn btn-primary btn-lg btn-block">5档</button>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <button id="back" type="button" class="btn btn-primary btn-lg btn-block">倒车</button>
+        </div>
+      </div>
+      <hr>
+<!--
+      <div class="row">
+        <div class="col-sm-3">
           <button id="next" type="button" class="btn btn-primary btn-lg btn-block">前进</button>
         </div>
       </div>
@@ -117,7 +186,8 @@ if (window.DeviceOrientationEvent){
           <button id="previous" type="button" class="btn btn-primary btn-lg btn-block">后退</button>
         </div>
       </div>
-    </div>   
+    </div>  
+-->
     <p>
         阁下：<span id="alpha">0</span>
     </p>
