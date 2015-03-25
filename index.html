@@ -23,58 +23,23 @@ var preSter = -1000;
 var preSterGama = -1000;
 var current = -1000;
 var currentGamma = -1000;
+var ipAddress = "ipaddress";
+function ipClicke()
+{
+    ipAddress = document.getElementById("ip").value;
+}
 
 window.onload =  function()
 {
-    $("#next").mousedown(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/speedOn"
-        });
-    });
-    $("#next").mouseup(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/speedOff"
-        });
-    });
-    $("#previous").mousedown(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/backOn"
-        });
-    });
-    $("#previous").mouseup(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.1.103:4242/backOff"
-        });
-    });
 
-    $("#one").click(function(event) {
+    $("#go").click(function(event) {
         $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + 0.2
-        });
-    });
-    $("#two").click(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + 0.4
-        });
-    });
-    $("#three").click(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + 0.6
-        });
-    });
-    $("#four").click(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + 0.8
-        });
-    });
-    $("#five").click(function(event) {
-        $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + 1.0
+            url: "http://"+ipAddress+":4242/speed?throttle=" + 0.2
         });
     });
     $("#back").click(function(event) {
         $.ajax({type: "GET",
-            url: "http://192.168.0.117:4242/speed?throttle=" + -1.0
+            url: "http://"+ipAddress+":4242/speed?throttle=" + -1.0
         });
     });
 
@@ -83,7 +48,7 @@ window.onload =  function()
             preSter = current;
             preSterGama = currentGamma;
             $.ajax({type: "GET",
-                url: "http://192.168.0.117:4242/steer?angle="+ current 
+                url: "http://"+ipAddress+":4242/steer?angle="+ current 
             });
         }
     }
@@ -137,43 +102,26 @@ if (window.DeviceOrientationEvent){
   
 <body >  
     <div class="container">
-      <br><br><br>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="one" type="button" class="btn btn-primary btn-lg btn-block">1档</button>
-        </div>
-      </div>
       <br>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="two" type="button" class="btn btn-primary btn-lg btn-block">2档</button>
+        <div class="dialog dialog-default demo-dialog">
+            <form class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control flat" placeholder="ip地址" id="ip">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" onClick="ipClicke()">提交</button>
+                </div>
+            </form>
         </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="three" type="button" class="btn btn-primary btn-lg btn-block">3档</button>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="four" type="button" class="btn btn-primary btn-lg btn-block">4档</button>
-        </div>
-      </div>
-      <br>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="five" type="button" class="btn btn-primary btn-lg btn-block">5档</button>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-3">
-          <button id="back" type="button" class="btn btn-primary btn-lg btn-block">倒车</button>
-        </div>
-      </div>
-      <hr>
+    </div>
+    <br><br>
+    <div class="container">
+        <p>
+            <button style="float:left; width:15%" id="go" type="button" class="btn btn-success btn-hg">前进</button>
+            <button style="float:right; width:15%" id="back" type="button" class="btn btn-danger btn-hg">后退</button>
+        </p>
+    </div>
+    <hr>
 <!--
       <div class="row">
         <div class="col-sm-3">
