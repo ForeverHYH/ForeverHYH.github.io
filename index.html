@@ -64,7 +64,7 @@ window.onload =  function()
         if (currentYG != preYG || current == null) {
             preYG = currentYG;
             $.ajax({type: "GET",
-                url: "http://"+ipAddress+"/steer?angle="+ (currentYG*15) 
+                url: "http://"+ipAddress+"/steer?angle="+ (currentYG*10) 
             });
         }
         
