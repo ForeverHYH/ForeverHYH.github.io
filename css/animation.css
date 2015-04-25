@@ -1,31 +1,70 @@
 .daojiu_01{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 0 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 0% 0%;
     overflow:hidden;
 }
 .daojiu_02{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 340px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 10% 0%;
+    overflow:hidden;
 }
 .daojiu_03{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 680px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 20% 0%;
+    overflow:hidden;
 }
 .daojiu_04{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 1020px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 30% 0%;
+    overflow:hidden;
 }
 .daojiu_05{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 1360px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 40% 0%;
+    overflow:hidden;
 }
 .daojiu_06{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 1700px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 50% 0%;
+    overflow:hidden;
 }
 .daojiu_07{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 2040px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 60% 0%;
+    overflow:hidden;
 }
 .daojiu_08{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 2380px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 70% 0%;
+    overflow:hidden;
 }
 .daojiu_09{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 2720px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 80% 0%;
+    overflow:hidden;
 }
 .daojiu_10{
-    background: url("../img/pour/01_daojiu_shu_total.jpg") no-repeat scroll 3060px 0 transparent;
+    background-image: 
+    url("../img/pour/01_daojiu_shu_total.jpg");
+    background-repeat:no-repeat;
+    background-position: 90% 0%;
+    overflow:hidden;
 }
