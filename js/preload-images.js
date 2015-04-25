@@ -116,7 +116,7 @@ imageRestList.push("img/map/map-pointer-marker.png");
 imageRestList.push("img/map/map-text.png");
 
 imageList.push("img/res/loading.png");
-imageList.push("img/pour/01_daojiu_shu_00000.jpg");
+imageList.push("img/pour/01_daojiu_shu_total.jpg");
 imageList.push("img/pour/01_daojiu_shu_00003.jpg");
 imageList.push("img/pour/01_daojiu_shu_00006.jpg");
 imageList.push("img/pour/01_daojiu_shu_00009.jpg");
