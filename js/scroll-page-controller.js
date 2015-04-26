@@ -18,7 +18,7 @@ function playScrollVideo() {
     }
     $(scrollVideoBox).css(
             'background-position', 
-            -scrollFrameIndex*videoBox.width()
+            -scrollFrameIndex*scrollVideoBox.width()
         );
     scrollFrameIndex += 1;
 }
