@@ -14,7 +14,7 @@ function playScrollVideo() {
         clearInterval(scrollIntervalID);
         return ;
     }
-    if (scrollFrameIndex == 2) {
+    if (scrollFrameIndex == 10) {
         playPeng();
     }
     $(scrollVideoBox).css(
