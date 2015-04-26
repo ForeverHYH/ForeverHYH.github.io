@@ -2,10 +2,12 @@
  * Created by zhaozijing on 4/17/15.
  */
 
- var cardFrameIndex = 0;
+ var cardFrameIndex = 1;
+ var cardFrame = 16;
+ var cardVideoBox = $(document.getElementById('cardImg')); 
 
  function playCardVideo() {
-    if (cardFrameIndex >= cardVideo.length) {
+    if (cardFrameIndex >= cardFrame) {
         stopNextAnim();
         clearInterval(intervalID);
 
@@ -26,12 +28,15 @@
 
        return ;
    }
-   $("#card"+cardFrameIndex).show();
+   $(cardVideoBox).css(
+            'background-position', 
+            -cardFrameIndex*videoBox.width()
+        );
    cardFrameIndex += 1;
 }
 
 function startCardVideo() {
-    cardFrameIndex = 0;
+    cardFrameIndex = 1;
     intervalID = setInterval(playCardVideo, refreshMilli * 2);
 }
 

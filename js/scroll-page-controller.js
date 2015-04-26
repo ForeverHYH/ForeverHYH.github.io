@@ -2,11 +2,13 @@
  * Created by zhaozijing on 4/17/15.
  */
 
-var scrollFrameIndex = 0;
+var scrollFrameIndex = 1;
 var scrollIntervalID = 0;
+var scrollFrame = 99;
+var scrollVideoBox = $(document.getElementById('scrollImg')); 
 
 function playScrollVideo() {
-    if (scrollFrameIndex > clinkVideo.length) {
+    if (scrollFrameIndex > scrollFrame) {
         showLogos();
         clearInterval(scrollIntervalID);
         return ;
@@ -14,7 +16,10 @@ function playScrollVideo() {
     if (scrollFrameIndex == 2) {
         playPeng();
     }
-    $("#clink" + scrollFrameIndex).show();
+    $(scrollVideoBox).css(
+            'background-position', 
+            -scrollFrameIndex*videoBox.width()
+        );
     scrollFrameIndex += 1;
 }
 
@@ -24,5 +29,5 @@ function startScrollVideo() {
     $("#clink-bei").hide();
 
     scrollFrameIndex = 0;
-    scrollIntervalID = setInterval(playScrollVideo, refreshMilli * 3);
+    scrollIntervalID = setInterval(playScrollVideo, refreshMilli * 2);
 }

@@ -1,70 +1,41 @@
-.daojiu_01{
+.start{
+    position: absolute;
+    height: 85%;
+    width: 85%;
+    left: 7%;
+
     background-image: 
-    url("../img/pour/01_daojiu_shu_0000.jpg");
+    url("../img/pour/PourTotal.jpg");
     background-repeat:no-repeat;
-    background-position: 0% 0%;
+    background-position: 0px;
+    background-size: 7000% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
     overflow:hidden;
 }
-.daojiu_02{
+
+.scroll{
+    position: absolute;
+    height: 85%;
+    width: 85%;
+    left: 7%;
+
     background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
+    url("../img/clink/ClinkTotal.jpg");
     background-repeat:no-repeat;
-    background-position: 10% 0%;
+    background-position: 0px;
+    background-size: 9900% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
     overflow:hidden;
 }
-.daojiu_03{
+
+.card{
+    position: absolute;
+    height: 85%;
+    width: 85%;
+    left: 7%;
+
     background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
+    url("../img/card/card.jpg");
     background-repeat:no-repeat;
-    background-position: 20% 0%;
-    overflow:hidden;
-}
-.daojiu_04{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 30% 0%;
-    overflow:hidden;
-}
-.daojiu_05{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 40% 0%;
-    overflow:hidden;
-}
-.daojiu_06{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 50% 0%;
-    overflow:hidden;
-}
-.daojiu_07{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 60% 0%;
-    overflow:hidden;
-}
-.daojiu_08{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 70% 0%;
-    overflow:hidden;
-}
-.daojiu_09{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 80% 0%;
-    overflow:hidden;
-}
-.daojiu_10{
-    background-image: 
-    url("../img/pour/01_daojiu_shu_total.jpg");
-    background-repeat:no-repeat;
-    background-position: 90% 0%;
+    background-position: 0px;
+    background-size: 1600% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
     overflow:hidden;
 }

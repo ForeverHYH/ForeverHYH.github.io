@@ -3,22 +3,27 @@
  */
 
 var refreshMilli = 50;
-var startFrameIndex = 0;
+var startFrameIndex = 1;
+var startFrame = 70;
+var videoBox = $(document.getElementById('startImg')); 
 
 function playStartVideo() {
-    if (startFrameIndex >= startVideo.length) {
+    if (startFrameIndex >= startFrame) {
         clearInterval(intervalID);
         startNextAnim();
         return;
     }
-    $("#start"+startFrameIndex).show();
+    $(videoBox).css(
+            'background-position', 
+            -startFrameIndex*videoBox.width()
+        );
     startFrameIndex += 1;
 }
 
 function startPlayStartVideo() {
     changePage("start");
     $(".z-start").hide();
-    startFrameIndex = 0;
+    startFrameIndex = 1;
     $("#first-bg").show();
     // start playing pngs
     intervalID = setInterval(playStartVideo, refreshMilli*2);
