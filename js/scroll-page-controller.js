@@ -8,7 +8,7 @@ var scrollFrame = 99;
 var scrollVideoBox = $(document.getElementById('scrollImg')); 
 
 function playScrollVideo() {
-    if (scrollFrameIndex > scrollFrame) {
+    if (scrollFrameIndex >= scrollFrame) {
         showLogos();
         clearInterval(scrollIntervalID);
         return ;
@@ -29,5 +29,5 @@ function startScrollVideo() {
     $("#clink-bei").hide();
 
     scrollFrameIndex = 0;
-    scrollIntervalID = setInterval(playScrollVideo, refreshMilli * 2);
+    scrollIntervalID = setInterval(playScrollVideo, refreshMilli);
 }
