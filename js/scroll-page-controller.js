@@ -9,6 +9,7 @@ var scrollVideoBox = $(document.getElementById('scrollImg'));
 
 function playScrollVideo() {
     if (scrollFrameIndex >= scrollFrame) {
+        $(document.getElementById('scrollImg')).hide();
         showLogos();
         clearInterval(scrollIntervalID);
         return ;

@@ -30,7 +30,7 @@
    }
    $(cardVideoBox).css(
             'background-position', 
-            -cardFrameIndex*videoBox.width()
+            -cardFrameIndex*cardVideoBox.width()
         );
    cardFrameIndex += 1;
 }
