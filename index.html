@@ -26,9 +26,9 @@
     function draw(){  
         context2D.clearRect(0,0,canvasWidth,canvasHeight);  
         context2D.save();//保存画笔状态  
-        context2D.translate(picWidth/2, rotateCount);//开始移动画笔  
+        context2D.translate(picWidth/2, rotateCount*3);//开始移动画笔  
         context2D.rotate(rotateCount*Math.PI/180);
-        context2D.drawImage(pic,0, 0,20,20);  
+        context2D.drawImage(pic,0, 0,picWidth/20,picWidth/20);  
         context2D.restore();//绘制结束以后，恢复画笔状态 
         rotateCount++; 
     }          
