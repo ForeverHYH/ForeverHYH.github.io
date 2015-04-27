@@ -4,7 +4,7 @@
 <script type="text/javascript" src="js/libs/jquery-1.11.2.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/card.css" />
 <div class="card" id="canvasDiv"> 
-    <canvas id="canvas" width="1080" height="1920">       
+    <canvas id="canvas" width="640" height="1200">       
          <p>Your browserdoes not support the canvas element!</p>      
     </canvas>
 </div>
@@ -26,7 +26,7 @@
     function draw(){  
         context2D.clearRect(0,0,canvasWidth,canvasHeight);  
         context2D.save();//保存画笔状态  
-        context2D.translate(picWidth/2, rotateCount*3);//开始移动画笔  
+        context2D.translate(picWidth/2, rotateCount*picWidth/200);//开始移动画笔  
         context2D.rotate(rotateCount*Math.PI/180);
         context2D.drawImage(pic,0, 0,picWidth/20,picWidth/20);  
         context2D.restore();//绘制结束以后，恢复画笔状态 
