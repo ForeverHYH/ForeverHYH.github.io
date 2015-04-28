@@ -54,7 +54,7 @@ function loadAnotherImage() {
 
 
 addAllImages = function() {
-imageRestList.push("img/clink/clinklittle.jpg");
+imageRestList.push("img/clink/clinklittle.png");
 
 imageRestList.push("img/res/1996.png");
 imageRestList.push("img/res/2003.png");
@@ -87,7 +87,7 @@ imageRestList.push("img/map/map-pointer-marker.png");
 imageRestList.push("img/map/map-text.png");
 
 imageList.push("img/res/loading.png");
-imageList.push("img/pour/pourPNG.jpg");
+imageList.push("img/pour/pourPNG.png");
 imageList.push("img/res/bottle.jpg");
 imageList.push("img/res/fourth-bg.png");
 imageList.push("img/res/main-text.png");
