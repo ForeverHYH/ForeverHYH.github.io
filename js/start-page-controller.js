@@ -1,7 +1,7 @@
 
 var refreshMilli = 50;
 var startFrameIndex = 1;
-var startFrame = 99;
+var startFrame = 70;
 var videoBox = $(document.getElementById('startImg')); 
 
 function playStartVideo() {

@@ -25,5 +25,5 @@ function startScrollVideo() {
     $("#clink-bei").hide();
 
     scrollFrameIndex = 0;
-    scrollIntervalID = setInterval(playScrollVideo, refreshMilli * 3);
+    scrollIntervalID = setInterval(playScrollVideo, refreshMilli);
 }
