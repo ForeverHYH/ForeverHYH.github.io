@@ -99,7 +99,7 @@ function showLogo() {
 }
 
 function hideClinkImage() {
-    $(".c-clink-image").hide();
+    $(".clinkImg").hide();
     $("#clink-final").show();
     $("#clink-final").css("opacity", 1);
     var c = $("#clinkImg");
@@ -135,7 +135,7 @@ function showLogos() {
 //上下的箭头刷新
 function stopNextAnim() {
     clearInterval(nextIntervalID);
-    $(".z-next").hide();
+    $(".page-next").hide();
 }
 
 function playNextAnim() {
@@ -143,7 +143,7 @@ function playNextAnim() {
     if (nextFrameIndex > 1) {
         nextFrameIndex = 0;
     }
-    $(".z-next").hide();
+    $(".page-next").hide();
     $("#next"+nextFrameIndex).show();
 }
 
