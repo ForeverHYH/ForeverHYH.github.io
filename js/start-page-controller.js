@@ -19,8 +19,9 @@ function playStartVideo() {
 }
 
 function startPlayStartVideo() {
+    changePage("start");
     startFrameIndex = 1;
-    // start playing pngs
+    $("#first-bg").show();
     intervalID = setInterval(playStartVideo, refreshMilli);
 }
 

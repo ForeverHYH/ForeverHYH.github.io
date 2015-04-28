@@ -1,40 +1,140 @@
-<!DOCTYPE HTML>  
-<html>  
-<body> 
-<script type="text/javascript" src="js/libs/jquery-1.11.2.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/card.css" />
-<div class="card" id="canvasDiv"> 
-    <canvas id="canvas" width="640" height="1200">       
-         <p>Your browserdoes not support the canvas element!</p>      
-    </canvas>
-</div>
-      
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>一张图片加载动画测试</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <script type="text/javascript" src="js/libs/jquery-1.11.2.min.js"></script>
+    <script>
+    if (!window.jQuery) {
+        var script = document.createElement('script');
+        script.src = "js/libs/jquery-1.11.2.min.js";
+        document.body.appendChild(script);
+    }
+    </script>
+    <script type="text/javascript" src="js/preload-images.js"></script>
+    <script type="text/javascript" src="js/director.js"></script>
 
-          
-<script type="text/javascript">      
-    var canvas =document.getElementById("canvas");
-    var div = document.getElementById("canvasDiv"); 
-    var context2D =canvas.getContext("2d"); 
-    var pic = new Image();
-    var rotateCount = 1;   
-    pic.src ="img/C.png";
-    var canvasWidth = canvas.width;
-    var canvasHeight = canvas.height;
-    var picWidth = div.offsetWidth;
-    var picHight = div.offsetHeight;
-    //注意下面方法中画笔状态的保护，这在很多情况下都会使用到  
-    function draw(){  
-        context2D.clearRect(0,0,canvasWidth,canvasHeight);  
-        context2D.save();//保存画笔状态  
-        context2D.translate(picWidth/2, rotateCount*picWidth/200);//开始移动画笔  
-        context2D.rotate(rotateCount*Math.PI/180);
-        context2D.drawImage(pic,0, 0,picWidth/20,picWidth/20);  
-        context2D.restore();//绘制结束以后，恢复画笔状态 
-        rotateCount++; 
-    }          
-       
-    setInterval(draw, 10);  
-       
-</script>      
-</body>  
-</html>  
+    <link rel="stylesheet" href="http://cdn.staticfile.org/foundation-essential/5.4.7/css/foundation.css">
+    <link rel="stylesheet" href="css/infocard.css">
+    <link rel="stylesheet" type="text/css" href="css/wine.css" />
+</head>
+
+<body>
+
+    <audio id="audiofile" onclick="playPeng()" style="position: absolute; opacity: 0" src="img/res/peng.mp3" preload></audio>
+
+    <div class="page" id="start">
+        <div class="start" id="startImg"></div>
+        <img id="first-bg" class="bg img-hide" src="img/res/main-text.png">
+    </div>
+
+    <div class="page" id="bottle">
+        <img class="bg" id="second-bg" src="img/res/second-bg.png">
+    </div>
+    
+    <div class="page" id="scroll">
+        <div class="clink" id="clinkImg"></div>
+        <img id="clink-final" class="img-hide img-clink-final" src="img/res/bottle.jpg">
+
+        <img id="logo10" class="img-hide z-logo z-logo-text" src="img/res/2010.jpg">
+        <img id="logo08" class="img-hide z-logo z-logo-text" src="img/res/2008.jpg">
+        <img id="logo03" class="img-hide z-logo z-logo-text" src="img/res/2003.jpg">
+        <img id="logo04" class="img-hide z-logo z-logo-text" src="img/res/2004.jpg">
+        <img id="logo96" class="img-hide z-logo z-logo-text" src="img/res/1996.jpg">
+
+        <img id="Logo10" class="img-hide z-logo z-logo-logo" src="img/res/2010.png">
+        <img id="Logo08" class="img-hide z-logo z-logo-logo" src="img/res/2008.png">
+        <img id="Logo03" class="img-hide z-logo z-logo-logo" src="img/res/2003.png">
+        <img id="Logo04" class="img-hide z-logo z-logo-logo" src="img/res/2004.png">
+        <img id="Logo96" class="img-hide z-logo z-logo-logo" src="img/res/1996.png">
+
+        <div id="scroll-swipe" style="position: absolute; width: 100%; height: 100%; opacity: 0"></div>
+    </div>
+
+    <div class="page" id="card">
+        <div class="card" id="canvasDiv"> 
+            <canvas id="canvas" width="60" height="60" class="cardCanvas">       
+                <p>当前动画不支持!</p>      
+            </canvas>
+        </div>
+    </div>
+
+    <div id="b-rotation-masker" class="page">
+        <div id="b-rotation-note" class="text-center">
+            <img src="img/infocard/b-rotate-note.png">
+        </div>
+    </div>
+
+    <div id="b-main-content" class="clearfix page">
+        <div id="main-content-container">
+            <div id="b-info-card-container" >
+                <div class="text-center">
+                    <img id="b-infocard-logo" src="img/infocard/infocard-logo.png">
+                </div>
+                <div>
+                    <img id="b-infocard-text" src="img/infocard/infocard-text.png">
+                </div>
+
+                <div id="b-input-container" class="clearfix">
+                    <ul class="small-block-grid-2">
+                        <li>
+                            <div class="inputcontainer clearfix">
+                                <img id="infonameimage" src="img/infocard/infocard-name-label.png">
+                                <input id="infoname" type="text" name="infoname" />
+                            </div>
+                        </li>
+                        <li>
+                            <div class="inputcontainer clearfix">
+                                <img id="infophoneimage" src="img/infocard/infocard-phone-label.png">
+                                <input id="infophone" type="text" name="infonum" />
+                            </div>
+                        </li>
+                    </ul>
+                    <div id="b-swipe-container" class="text-center">
+                        <img src="img/infocard/swipe-right-note.png">
+                    </div> 
+                    <!-- <button id="b-submit-button">提交</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="map-content" class="clearfix page">
+        <div id="map-content-container">
+            <div id="map-text-container" class="text-center">
+                <div>
+                    <img id="map-logo" src="img/map/map-logo.png">
+                </div>
+                <div>
+                    <img id="map-pointer" src="img/map/map-pointer-marker.png">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <img id="next0" class="z-next" src="img/res/next0.png">
+    <img id="next1" class="z-next" src="img/res/next1.png">
+
+    <div class="page" id="preload" style="background-color: black">
+        <img src="img/res/loading.png" style="width:50%; height:50%; left: 25%; top: 25%; position:absolute;">
+        <div id="load-pprogress" align="center" style="position:absolute; left: 25%; top:65%; background-color: #333333; width: 50%; height: 4px">
+        </div>
+        <div id="load-progress" align="center" style="position:absolute; left: 50%; top:65%; background-color: red; width: 0%; height: 4px">
+        </div>
+
+    </div>
+
+<script type="text/javascript" src="js/libs/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="js/start-page-controller.js"></script>
+<script type="text/javascript" src="js/scroll-page-controller.js"></script>
+<script type="text/javascript" src="js/card-page-controller.js"></script>
+<script type="text/javascript" src="js/gestures.js"></script>
+<script type="text/javascript" src="http://cdn.staticfile.org/foundation-essential/5.4.7/js/foundation/foundation.min.js"></script>
+<!-- // <script src="js/libs/foundation/foundation.min.js"></script> -->
+<script src="js/infocard.js"></script>
+</body>
