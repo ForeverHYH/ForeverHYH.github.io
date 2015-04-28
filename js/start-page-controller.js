@@ -1,7 +1,7 @@
 
 var refreshMilli = 50;
 var startFrameIndex = 1;
-var startFrame = 70;
+var startFrame = 20;
 var videoBox = $(document.getElementById('startImg')); 
 
 function playStartVideo() {
@@ -22,7 +22,7 @@ function startPlayStartVideo() {
     changePage("start");
     startFrameIndex = 1;
     $("#first-bg").show();
-    intervalID = setInterval(playStartVideo, refreshMilli);
+    intervalID = setInterval(playStartVideo, refreshMilli*2);
 }
 
 

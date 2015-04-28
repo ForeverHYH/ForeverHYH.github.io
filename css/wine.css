@@ -23,10 +23,10 @@ body {
     left: 7%;
 
     background-image: 
-    url("../img/pour/PourTotal.jpg");
+    url("../img/pour/pourPNG.png");
     background-repeat:no-repeat;
     background-position: 0px;
-    background-size: 7000% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
+    background-size: 2000% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
     overflow:hidden;
 }
 
@@ -38,10 +38,10 @@ body {
     height: 100%;
 
     background-image: 
-    url("../img/clink/ClinkTotal.jpg");
+    url("../img/clink/clinklittle.png");
     background-repeat:no-repeat;
     background-position: 0px;
-    background-size: 9900% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
+    background-size: 2000% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
     overflow:hidden;
 }
 

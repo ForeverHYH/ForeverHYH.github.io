@@ -1,6 +1,6 @@
 var scrollFrameIndex = 1;
 var scrollIntervalID = 0;
-var scrollFrame = 99;
+var scrollFrame = 20;
 var scrollVideoBox = $(document.getElementById('clinkImg')); 
 
 function playScrollVideo() {
@@ -25,5 +25,5 @@ function startScrollVideo() {
     $("#clink-bei").hide();
 
     scrollFrameIndex = 0;
-    scrollIntervalID = setInterval(playScrollVideo, refreshMilli);
+    scrollIntervalID = setInterval(playScrollVideo, refreshMilli*2);
 }
