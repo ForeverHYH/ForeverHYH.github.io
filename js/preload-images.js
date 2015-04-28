@@ -54,7 +54,7 @@ function loadAnotherImage() {
 
 
 addAllImages = function() {
-imageRestList.push("img/clink/clinklittle.png");
+imageList.push("img/clink/clinklittle.png");
 
 imageRestList.push("img/res/1996.png");
 imageRestList.push("img/res/2003.png");
