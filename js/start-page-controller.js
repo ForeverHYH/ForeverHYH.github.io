@@ -7,7 +7,7 @@ var videoBox = $(document.getElementById('startImg'));
 function playStartVideo() {
     if (startFrameIndex >= startFrame) {
         clearInterval(intervalID);
-        //startNextAnim();
+        startNextAnim();
         return;
     }
     $(videoBox).css(

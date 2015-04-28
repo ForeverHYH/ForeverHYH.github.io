@@ -17,7 +17,7 @@ $(function() {
 
     $("#first-bg").swipe({
         swipeUp:function() {
-            if (startFrameIndex >= startVideo.length) {
+            if (startFrameIndex >= 99) {
                 changePage("bottle");
                 showSecondBG();
             }
