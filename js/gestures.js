@@ -17,7 +17,7 @@ $(function() {
 
     $("#first-bg").swipe({
         swipeUp:function() {
-            if (startFrameIndex >= 99) {
+            if (startFrameIndex >= 70) {
                 changePage("bottle");
                 showSecondBG();
             }
