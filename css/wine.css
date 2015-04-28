@@ -38,7 +38,7 @@ body {
     height: 100%;
 
     background-image: 
-    url("../img/clink/clinklittle.png");
+    url("../img/clink/clinklittle128.png");
     background-repeat:no-repeat;
     background-position: 0px;
     background-size: 2000% 100%; /* x的值需取胶卷的照片个数x100%，eg.胶卷中的照片数为10，就是1000％ */
