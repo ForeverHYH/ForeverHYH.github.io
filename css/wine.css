@@ -80,3 +80,11 @@ body {
     width: 22%;
     height: 100%;
 }
+
+.page-next {
+    position: absolute;
+    width: 5%;
+    height: 3%;
+    left: 90%;
+    top: 90%;
+}
