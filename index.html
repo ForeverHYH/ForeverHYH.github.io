@@ -1,141 +1,401 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <title>H5测试项目</title>
+<html lang="en">
+<head>
+    <title>three.js webgl - trackball controls</title>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <script type="text/javascript" src="js/libs/jquery-1.11.2.min.js"></script>
-    <script>
-    if (!window.jQuery) {
-        var script = document.createElement('script');
-        script.src = "js/libs/jquery-1.11.2.min.js";
-        document.body.appendChild(script);
-    }
-    </script>
-    <script type="text/javascript" src="http://cdn.staticfile.org/PreloadJS/0.4.1/preloadjs.min.js"></script>
-    <script type="text/javascript" src="js/preload-images.js"></script>
-    <script type="text/javascript" src="js/director.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, portrait">
 
-    <link rel="stylesheet" href="http://cdn.staticfile.org/foundation-essential/5.4.7/css/foundation.css">
-    <link rel="stylesheet" href="css/infocard.css">
-    <link rel="stylesheet" type="text/css" href="css/wine.css" />
+    <style>
+        body {
+            color: #000;
+            font-family:Monospace;
+            font-size:13px;
+            text-align:center;
+            font-weight: bold;
+            background-color: #fff;
+            margin: 0px;
+            overflow: hidden;
+        }
+        #info {
+            color:#000;
+            position: absolute;
+            top: 0px; width: 100%;
+            padding: 5px;
+        }
+        a {
+            color: red;
+        }
+        #container{width:100%;position:absolute;left:0%;top:0%;height:40%;z-index:0;}
+        #SceneBtnDIV{width:25%;position:absolute;left:5%;top:80%;height:8%;z-index:0;}
+
+        #menu{width:100%;position:absolute;left:0%;top:40%;height:0%;z-index:1;background-color: whitesmoke}
+
+        #chooseOutlookType{width:100%;position:absolute;left:0%;top:0%;height:87.5%;z-index:1;background-color: black}
+            #title{width:100%;position:absolute;left:0%;top:0%;height:12.5%;z-index:1;background-color: whitesmoke;
+            background-image: url("UI/选择.png");background-repeat:no-repeat; background-size:100% 100%}
+            #subTitle{width:100%;position:absolute;left:0%;top:12.5%;height:12.5%;z-index:1;background-color: whitesmoke}
+            #colorMenu{width:50%;position:absolute;left:0%;top:25%;height:75%;z-index:1;background-color: whitesmoke}
+            #protectorsMenu{width:50%;position:absolute;left:50%;top:25%;height:75%;z-index:1;background-color: whitesmoke}
+
+
+
+        #chooseMemorytype{width:100%;position:absolute;left:0%;top:87.5%;height:12.5%;z-index:1;background-color: black;flex: auto}
+
+        .colorCell{width:100%;left:0%;height: 20%;z-index:1;background-color: whitesmoke}
+
+        .button {
+            background: transparent; /*完全透明*/
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
 </head>
 
 <body>
+<div id="container">
+    <div id="SceneBtnDIV">
+        <button id="scene1Btn" style="background-image: url(UI/场景一.png);
+         background-repeat:no-repeat; background-size:100% 100%;
+         width:50%;position:absolute;left:0%;height:100%;"
+                onclick="ChangeScene(1)"></button>
 
-    <audio id="audiofile" onclick="playPeng()" style="position: absolute; opacity: 0" src="img/res/peng.mp3" preload></audio>
-
-    <div class="page" id="start">
-        <div class="start" id="startImg"></div>
-        <img id="first-bg" class="bg img-hide" src="img/res/main-text.png">
+        <button id="scene2Btn" style="background-image: url(UI/场景二.png);
+        background-repeat:no-repeat; background-size:100% 100%;
+        width:50%;position:absolute;left:50%;height:100%;"
+                onclick="ChangeScene(2)"></button>
     </div>
 
-    <div class="page" id="bottle">
-        <img class="bg" id="second-bg" src="img/res/second-bg.png">
-    </div>
-    
-    <div class="page" id="scroll">
-        <div class="clink" id="clinkImg"></div>
-        <img id="clink-final" class="img-hide img-clink-final" src="img/res/bottle.jpg">
-
-        <img id="logo10" class="img-hide z-logo z-logo-text" src="img/res/2010.jpg">
-        <img id="logo08" class="img-hide z-logo z-logo-text" src="img/res/2008.jpg">
-        <img id="logo03" class="img-hide z-logo z-logo-text" src="img/res/2003.jpg">
-        <img id="logo04" class="img-hide z-logo z-logo-text" src="img/res/2004.jpg">
-        <img id="logo96" class="img-hide z-logo z-logo-text" src="img/res/1996.jpg">
-
-        <img id="Logo10" class="img-hide z-logo z-logo-logo" src="img/res/2010.png">
-        <img id="Logo08" class="img-hide z-logo z-logo-logo" src="img/res/2008.png">
-        <img id="Logo03" class="img-hide z-logo z-logo-logo" src="img/res/2003.png">
-        <img id="Logo04" class="img-hide z-logo z-logo-logo" src="img/res/2004.png">
-        <img id="Logo96" class="img-hide z-logo z-logo-logo" src="img/res/1996.png">
-
-        <div id="scroll-swipe" style="position: absolute; width: 100%; height: 100%; opacity: 0"></div>
-    </div>
-
-    <div class="page" id="card">
-        <div class="card" id="canvasDiv"> 
-            <canvas id="canvas" width="60" height="60" class="cardCanvas">       
-                <p>当前动画不支持!</p>      
-            </canvas>
+</div>
+<div id="menu">
+    <div id="chooseOutlookType">
+        <div id="title">
+            <button class="button" id="mainPageBtn" style="background-image: url(UI/主页.png);
+         background-repeat:no-repeat; background-size:100% 100%;
+         width:8%;position:absolute;left:85%;right:10%;top: 15%;height:70%;"></button>
         </div>
-    </div>
-
-    <div id="b-rotation-masker" class="page">
-        <div id="b-rotation-note" class="text-center">
-            <img src="img/infocard/b-rotate-note.png">
+        <div id="subTitle">
+            <img src="UI/箭头.png" style="width: 4%;height: 20%;left: 10%;top: 40%;position: absolute;">
+            <img src="UI/颜色.png" style="width: 8%;height: 40%;left: 16%;top: 30%;position: absolute;">
+            <img src="UI/箭头.png" style="width: 4%;height: 20%;left: 60%;top: 40%;position: absolute;">
+            <img src="UI/颜色.png" style="width: 8%;height: 40%;left: 66%;top: 30%;position: absolute;">
         </div>
-    </div>
-
-    <div id="b-main-content" class="clearfix page">
-        <div id="main-content-container">
-            <div id="b-info-card-container" >
-                <div class="text-center">
-                    <img id="b-infocard-logo" src="img/infocard/infocard-logo.png">
-                </div>
-                <div>
-                    <img id="b-infocard-text" src="img/infocard/infocard-text.png">
-                </div>
-
-                <div id="b-input-container" class="clearfix">
-                    <ul class="small-block-grid-2">
-                        <li>
-                            <div class="inputcontainer clearfix">
-                                <img id="infonameimage" src="img/infocard/infocard-name-label.png">
-                                <input id="infoname" type="text" name="infoname" />
-                            </div>
-                        </li>
-                        <li>
-                            <div class="inputcontainer clearfix">
-                                <img id="infophoneimage" src="img/infocard/infocard-phone-label.png">
-                                <input id="infophone" type="text" name="infonum" />
-                            </div>
-                        </li>
-                    </ul>
-                    <div id="b-swipe-container" class="text-center">
-                        <img src="img/infocard/swipe-right-note.png">
-                    </div> 
-                    <!-- <button id="b-submit-button">提交</button> -->
-                </div>
+        <div id="colorMenu">
+            <div id="colorCell1" class="colorCell">
+                <img src="UI/流光金.png" style="width: 20%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机壳%20金.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+                <img src="UI/矩形_golden.png" style="width: 30%;height: 50%;left: 10%;top: 5%;position: relative;">
+            </div>
+            <div id="colorCell2" class="colorCell">
+                <img src="UI/幻夜黑.png" style="width: 20%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机-1.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+                <img src="UI/矩形_black.png" style="width: 30%;height: 50%;left: 10%;top: 5%;position: relative;">
+            </div>
+            <div id="colorCell3" class="colorCell">
+                <img src="UI/珠光白.png" style="width: 20%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机-1.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+                <img src="UI/矩形_white.png" style="width: 30%;height: 50%;left: 10%;top: 5%;position: relative;">
+            </div>
+            <div id="colorCell4" class="colorCell">
+                <img src="UI/樱花粉.png" style="width: 20%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机-1.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+                <img src="UI/矩形_pink.png" style="width: 30%;height: 50%;left: 10%;top: 5%;position: relative;">
+            </div>
+            <div id="colorCell5" class="colorCell">
+                <img src="UI/魅海蓝.png" style="width: 20%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机-1.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+                <img src="UI/矩形_blue.png" style="width: 30%;height: 50%;left: 10%;top: 5%;position: relative;">
+            </div>
+        </div>
+        <div id="protectorsMenu">
+            <div id="protectorsCell1" class="colorCell">
+                <img src="UI/蓝色.png" style="width: 15%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机壳.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+            </div>
+            <div id="protectorsCell2" class="colorCell">
+                <img src="UI/金色.png" style="width: 15%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机壳.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
+            </div>
+            <div id="protectorsCell3" class="colorCell">
+                <img src="UI/灰色.png" style="width: 15%;height: 30%;left: -10%;top: -8%;position: relative;">
+                <img src="UI/手机壳.png" style="width: 9%;height: 70%;left: -2%;top: 15%;position: relative;">
             </div>
         </div>
     </div>
-
-    <div id="map-content" class="clearfix page">
-        <div id="map-content-container">
-            <div id="map-text-container" class="text-center">
-                <div>
-                    <img id="map-logo" src="img/map/map-logo.png">
-                </div>
-                <div>
-                    <img id="map-pointer" src="img/map/map-pointer-marker.png">
-                </div>
-
-            </div>
+    <div id="chooseMemorytype">
+        <div id="64GB" style="width:49%;left:0%;height:100%;top: 0%;background-image: url(UI/红色条.png);background-repeat:no-repeat; background-size:100% 100%;position: absolute;">
+            <img src="UI/4GB-1.png" style="width:50%;height:35%;top:30%;position: relative">
+        </div>
+        <div id="32GB" style="width:49%;left:51%;height:100%;top: 0%;background-image: url(UI/黑色条.png);background-repeat:no-repeat; background-size:100% 100%;position: absolute;">
+            <img src="UI/4GB.png" style="width:50%;height:35%;top:30%;position: relative">
         </div>
     </div>
+</div>
 
-    <img id="next0" class="page-next" src="img/res/next0.png">
-    <img id="next1" class="page-next" src="img/res/next1.png">
+<script src="lib/three.js"></script>
 
-    <div class="page" id="preload" style="background-color: black">
-        <img src="img/res/loading.png" style="width:50%; height:50%; left: 25%; top: 25%; position:absolute;">
-        <div id="load-pprogress" align="center" style="position:absolute; left: 25%; top:65%; background-color: #333333; width: 50%; height: 4px">
-        </div>
-        <div id="load-progress" align="center" style="position:absolute; left: 50%; top:65%; background-color: red; width: 0%; height: 4px">
-        </div>
+<script src="lib/TrackballControls.js"></script>
+<script src="lib/OrbitControls.js"></script>
+<script src="lib/FirstPersonControls.js"></script>
+<script src="lib/DDSLoader.js"></script>
+<script src="lib/MTLLoader.js"></script>
+<script src="lib/OBJLoader.js"></script>
+<script src="lib/FBXLoader2.js"></script>
+<script src="lib/J3DLoader.js"></script>
 
-    </div>
 
-<script type="text/javascript" src="js/libs/jquery.touchSwipe.min.js"></script>
-<script type="text/javascript" src="js/start-page-controller.js"></script>
-<script type="text/javascript" src="js/scroll-page-controller.js"></script>
-<script type="text/javascript" src="js/card-page-controller.js"></script>
-<script type="text/javascript" src="js/gestures.js"></script>
-<script type="text/javascript" src="http://cdn.staticfile.org/foundation-essential/5.4.7/js/foundation/foundation.min.js"></script>
-<!-- // <script src="js/libs/foundation/foundation.min.js"></script> -->
-<script src="js/infocard.js"></script>
+<script>
+    var container;
+    var camera0, controls0,
+            camera1, controls1,
+            camera2, controls2,
+            scene, renderer;
+    var backgroundScene, backgroundCamera;
+    var cross;
+    var containerWidth = window.innerWidth,
+            containerHeight = window.innerHeight*1.0;
+    var clock;
+    var currentSceneId = 0;
+    var bgPlane;
+    init();
+    animate();
+    function init() {
+        // renderer
+        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( containerWidth, containerHeight );
+        renderer.autoClear = false;
+        // world
+        scene = new THREE.Scene();
+
+
+        clock = new THREE.Clock();
+        {
+            camera1 = new THREE.PerspectiveCamera( 45, containerWidth / containerHeight, 0.1, 1000 );
+            camera1.position.set(-3.7847362406408256,0.8955103457487564,-0.1922519544726683);
+
+            controls1 = new THREE.TrackballControls( camera1 );
+            controls1.rotateSpeed = 0.1;
+            controls1.shouldRotateLittle = true;
+            controls1.target.set(-3.797321206293463,0.8378898553999574,-0.8899196347688149);
+            controls1.zoomSpeed = 2;
+            controls1.panSpeed = 0.8;
+            controls1.noZoom = false;
+            controls1.noPan = true;
+            controls1.staticMoving = true;
+            controls1.dynamicDampingFactor = 0.3;
+            controls1.minDistance = 0.2;
+            controls1.maxDistance = 0.6;
+            controls1.keys = [ 65, 83, 68 ];
+
+        }
+        {
+            //0号相机，用于查看单独的手机
+            camera0 = new THREE.PerspectiveCamera( 45, containerWidth / containerHeight, 0.1, 1000 );
+            camera0.position.set(-0.3,10,0.23);
+
+            controls0 = new THREE.TrackballControls( camera0 );
+            controls0.rotateSpeed = 2.0;
+            controls0.target.set(0,10, 0);
+            controls0.zoomSpeed = 2;
+            controls0.panSpeed = 0.8;
+            controls0.noZoom = false;
+            controls0.noPan = false;
+            controls0.staticMoving = true;
+            controls0.dynamicDampingFactor = 0.3;
+            controls0.minDistance = 0.2;
+            controls0.maxDistance = 0.4;
+            controls0.keys = [ 65, 83, 68 ];
+        }
+
+
+        var planGeo = new THREE.PlaneGeometry( 5, 5 );
+        var textureURL = 'UI/bg_1.png';
+        var texture = THREE.ImageUtils.loadTexture( textureURL );
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set( 1, 1 );
+        var bgMat = new THREE.MeshBasicMaterial( { map: texture,side: THREE.DoubleSide,opacity:1,transparent:true});
+
+        bgPlane = new THREE.Mesh(planGeo,bgMat);
+
+        bgPlane.material.depthTest = false;
+        bgPlane.material.depthWrite = false;
+//        bgPlane.position.set(0.3,10,-0.23);
+//        bgPlane.lookAt(camera0.position);
+//        scene.add(bgPlane);
+
+        backgroundScene = new THREE.Scene();
+        backgroundCamera = new THREE.Camera();
+
+        backgroundScene.add(backgroundCamera);
+        backgroundScene.add(bgPlane);
+
+        loadJsonModel("fbxscene/mobile_0922",1,0);
+        loadJsonModel("fbxscene/mobile_center",1,10);
+
+
+        // lights
+        var light = new THREE.DirectionalLight( 0xffffff ,0.5);
+        light.position.set( 1, 1, 1 );
+        scene.add( light );
+        var light = new THREE.DirectionalLight( 0xffffff,0.5 );
+        light.position.set( -1, -1, -1 );
+        scene.add( light );
+        var light = new THREE.AmbientLight( 0xffffff ,0.5);
+        scene.add( light );
+
+
+        container = document.getElementById( 'container' );
+        container.appendChild( renderer.domElement );
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+        //
+    }
+
+    function loadJsonModel(path,scale,height){
+        loader = new THREE.ObjectLoader();
+        loader.load('Model/' + path + '.json', function (obj) {
+            mesh = obj;
+            console.log(obj.name);
+            for(var i=0; i<obj.children.length; i++)
+            {
+                if(obj.children[i].name=="huaWei_honor9_model_v03_HW_honor9_screenGlass_geo"
+                || obj.children[i].name=="HW_honor9_screenGlass_geo")
+                {
+                    //要设置成透明的材质的前板玻璃
+//                    obj.children[i].children[0].material = new THREE.MeshPhongMaterial({side: THREE.DoubleSide,opacity:0,transparent:true});
+                    var r = "UI/skybox/";
+                    var urls = [
+                        r + "reflex.png", r + "reflex.png",
+                        r + "reflex.png", r + "reflex.png",
+                        r + "reflex.png", r + "reflex.png"
+                    ];
+
+                    var textureCube = new THREE.CubeTextureLoader().load( urls );
+
+                    var outMat = new THREE.MeshStandardMaterial();
+                    outMat.color.setHex( 0xffffff );
+                    outMat.opacity=0.1;
+                    outMat.metalness = 10;
+                    outMat.roughtness = 0.3;
+
+                    outMat.envMap = textureCube;
+                    outMat.side = THREE.DoubleSide;
+                    outMat.transparent = true;
+                    obj.children[i].children[0].material= outMat;
+                }
+
+                if(obj.children[i].name=="huaWei_honor9_model_v03_HW_honor9_backMetal_geo"
+                        || obj.children[i].name=="HW_honor9_backMetal_geo")
+                {
+                    //要设置成反射材质的后盖
+                    var r = "UI/skybox/";
+                    var urls = [
+                        r + "reflex.png", r + "reflex.png",
+                        r + "reflex.png", r + "reflex.png",
+                        r + "reflex.png", r + "reflex.png"
+                    ];
+
+                    var textureCube = new THREE.CubeTextureLoader().load( urls );
+
+                    var outMat = new THREE.MeshStandardMaterial();
+                    outMat.color.setHex( 0x1449ac );
+                    outMat.metalness = 1;
+                    outMat.roughtness = 1;
+
+                    outMat.envMap = textureCube;
+                    outMat.side = THREE.DoubleSide;
+                    outMat.transparent = true;
+                    obj.children[i].children[0].material= outMat;
+//                    var refractionCube = new THREE.CubeTextureLoader().load( urls );
+//                    refractionCube.mapping = THREE.CubeRefractionMapping;
+//                    refractionCube.format = THREE.RGBFormat;
+//
+//                    var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: refractionCube, refractionRatio: 1 } );
+//                    obj.children[i].children[0].material= cubeMaterial2;
+                }
+
+                if(obj.children[i].name=="HW_honor9_screen_geo"
+                        || obj.children[i].name=="huaWei_honor9_model_v03_HW_honor9_screen_geo")
+                {
+                    var texture1 = THREE.ImageUtils.loadTexture( 'UI/screen_color_screen_color.jpg' );
+                    texture1.wrapS = texture1.wrapT = THREE.RepeatWrapping;
+                    texture1.repeat.set( 1, 1 );
+                    //要贴上贴图的屏幕
+                    obj.children[i].children[0].material = new THREE.MeshPhongMaterial({map: texture1,side: THREE.DoubleSide,opacity:1,transparent:true});
+                }
+
+            }
+            mesh.scale.set(scale,scale,scale);
+            mesh.position.set(0,0,0);
+            mesh.position.y = height;
+
+            scene.add(mesh);
+        });
+
+    }
+
+    function ChangeScene(id) {
+        if(id==1)
+        {
+            if(currentSceneId==1)
+            {
+                currentSceneId=0;
+            }
+            else
+            {
+                currentSceneId=1;
+            }
+        }
+    }
+
+    function onWindowResize() {
+        camera0.aspect = containerWidth / containerHeight;
+        camera0.updateProjectionMatrix();
+        renderer.setSize( containerWidth, containerHeight );
+        controls0.handleResize();
+        controls1.handleResize();
+        renderer.autoClear = false;
+        renderer.clear();
+
+        renderer.render( backgroundScene, backgroundCamera );
+        renderer.render( scene, camera0 );
+
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+//        var delta = clock.getDelta();
+        if(currentSceneId==0)
+        {
+            controls0.update();
+
+            renderer.autoClear = false;
+            renderer.clear();
+            renderer.render( backgroundScene, backgroundCamera );
+            renderer.render( scene, camera0 );
+
+            //对背景板做处理，跟着摄像机动，而且要朝着相机看
+//            bgPlane.position.set(-1*camera0.position.x,10,-1*camera0.position.z);
+//            bgPlane.lookAt(camera0.position);
+
+        }
+        if(currentSceneId==1)
+        {
+            controls1.update();
+            renderer.render( scene, camera1 );
+        }
+
+        if(currentSceneId==2)
+        {
+            controls2.update();
+            renderer.render( scene, camera2 );
+        }
+    }
+
+</script>
+
 </body>
+</html>
