@@ -142,7 +142,7 @@
 <script src="lib/DDSLoader.js"></script>
 <script src="lib/MTLLoader.js"></script>
 <script src="lib/OBJLoader.js"></script>
-<script src="lib/FBXLoader2.js"></script>
+<script src="lib/FBXLoader.js"></script>
 <script src="lib/J3DLoader.js"></script>
 
 
@@ -234,7 +234,7 @@
 
         loadJsonModel("fbxscene/mobile_0922",1,0);
         loadJsonModel("fbxscene/mobile_center",1,10);
-
+//        loadFBXModel("fbxscene/hw_honor9_model_0930_v10");
 
         // lights
         var light = new THREE.DirectionalLight( 0xffffff ,0.5);
@@ -243,8 +243,24 @@
         var light = new THREE.DirectionalLight( 0xffffff,0.5 );
         light.position.set( -1, -1, -1 );
         scene.add( light );
-        var light = new THREE.AmbientLight( 0xffffff ,0.5);
+        var light = new THREE.AmbientLight( 0xffffff ,0.4);
         scene.add( light );
+
+//        var ambientLight = new THREE.AmbientLight( 0xffffff,0.5 );
+//        scene.add( ambientLight );
+
+        var lights = [];
+        lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 5 );
+        lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 5 );
+        lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 5 );
+
+        lights[ 0 ].position.set( 0, 10.5, 0 );
+        lights[ 1 ].position.set( 1, 10.5, 1 );
+        lights[ 2 ].position.set( - 1, 9.5, - 1 );
+
+        scene.add( lights[ 0 ] );
+        scene.add( lights[ 1 ] );
+        scene.add( lights[ 2 ] );
 
 
         container = document.getElementById( 'container' );
@@ -265,7 +281,7 @@
                 || obj.children[i].name=="HW_honor9_screenGlass_geo")
                 {
                     //要设置成透明的材质的前板玻璃
-//                    obj.children[i].children[0].material = new THREE.MeshPhongMaterial({side: THREE.DoubleSide,opacity:0,transparent:true});
+//                    obj.children[i].children[0].material = new THREE.MeshPhongMaterial({side: THREE.DoubleSide,opacity:0.1,transparent:true});
                     var r = "UI/skybox/";
                     var urls = [
                         r + "reflex.png", r + "reflex.png",
@@ -277,18 +293,32 @@
 
                     var outMat = new THREE.MeshStandardMaterial();
                     outMat.color.setHex( 0xffffff );
-                    outMat.opacity=0.1;
-                    outMat.metalness = 10;
-                    outMat.roughtness = 0.3;
+                    outMat.metalness = 1;
+                    outMat.opacity = 0.2;
+                    outMat.roughness = 1;
 
                     outMat.envMap = textureCube;
-                    outMat.side = THREE.DoubleSide;
+                    outMat.side = THREE.FrontSide;
                     outMat.transparent = true;
                     obj.children[i].children[0].material= outMat;
+                    obj.children[i].visible = false;
                 }
 
                 if(obj.children[i].name=="huaWei_honor9_model_v03_HW_honor9_backMetal_geo"
-                        || obj.children[i].name=="HW_honor9_backMetal_geo")
+                        || obj.children[i].name=="HW_honor9_backMetal_geo"
+//                        || obj.children[i].name=="HW_honor9_camear01_back_geo"
+//                        || obj.children[i].name=="HW_honor9_camera01Frame_back_geo"
+//                        || obj.children[i].name=="HW_honor9_camear02_back_geo"
+//                        || obj.children[i].name=="HW_honor9_camera02Frame_back_geo"
+                        || obj.children[i].name=="HW_honor9_probeFrame_geo"
+                        || obj.children[i].name=="HW_honor9_sideMetal_geo"
+                        || obj.children[i].name=="HW_honor9_frameBlue_geo"
+                    ||obj.children[i].name=="HW_honor9_screenMetal_geo"
+                    || obj.children[i].name=="HW_honor9_homeButton_frame_geo"
+                    || obj.children[i].name=="HW_honor9_homeButton_geo"
+                    || obj.children[i].name=="HW_honor9_volumeButton_geo"
+                    || obj.children[i].name=="HW_honor9_lockButton_geo"
+                        )
                 {
                     //要设置成反射材质的后盖
                     var r = "UI/skybox/";
@@ -298,24 +328,41 @@
                         r + "reflex.png", r + "reflex.png"
                     ];
 
+//                    var format = '.jpg';
+//                    var urls = [
+//                        r + 'nx' + format, r + 'nx' + format,
+//                        r + 'nx' + format, r + 'nx' + format,
+//                        r + 'nx' + format, r + 'nx' + format
+//                    ];
+
                     var textureCube = new THREE.CubeTextureLoader().load( urls );
 
                     var outMat = new THREE.MeshStandardMaterial();
                     outMat.color.setHex( 0x1449ac );
                     outMat.metalness = 1;
-                    outMat.roughtness = 1;
+                    outMat.roughness = 0.05;
 
                     outMat.envMap = textureCube;
+//                    outMat.mapping = THREE.CubeRefractionMapping;
                     outMat.side = THREE.DoubleSide;
                     outMat.transparent = true;
                     obj.children[i].children[0].material= outMat;
-//                    var refractionCube = new THREE.CubeTextureLoader().load( urls );
-//                    refractionCube.mapping = THREE.CubeRefractionMapping;
-//                    refractionCube.format = THREE.RGBFormat;
-//
-//                    var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: refractionCube, refractionRatio: 1 } );
-//                    obj.children[i].children[0].material= cubeMaterial2;
                 }
+
+//                if(obj.children[i].name=="HW_honor9_screenMetal_geo"
+//                        || obj.children[i].name=="HW_honor9_homeButton_frame_geo"
+//                        || obj.children[i].name=="HW_honor9_homeButton_geo"
+//                        || obj.children[i].name=="HW_honor9_volumeButton_geo")
+//                {
+//                    obj.children[i].children[0].material = new THREE.MeshPhongMaterial({
+//                        side: THREE.DoubleSide,
+//                        opacity:1,
+//                        transparent:true,
+//                        specular:0xffffff,
+//                        shininess:100,
+//                    emissive:0x0});
+//
+//                }
 
                 if(obj.children[i].name=="HW_honor9_screen_geo"
                         || obj.children[i].name=="huaWei_honor9_model_v03_HW_honor9_screen_geo")
@@ -325,7 +372,31 @@
                     texture1.repeat.set( 1, 1 );
                     //要贴上贴图的屏幕
                     obj.children[i].children[0].material = new THREE.MeshPhongMaterial({map: texture1,side: THREE.DoubleSide,opacity:1,transparent:true});
+
+                    //要设置成反射材质的后盖
+//                    var r = "UI/skybox/";
+//                    var urls = [
+//                        r + "reflex.png", r + "reflex.png",
+//                        r + "reflex.png", r + "reflex.png",
+//                        r + "reflex.png", r + "reflex.png"
+//                    ];
+//
+//                    var textureCube = new THREE.CubeTextureLoader().load( urls );
+//
+//                    var outMat = new THREE.MeshStandardMaterial();
+////                    outMat.color.setHex( 0x1449ac );
+//                    outMat.metalness = 1;
+//                    outMat.roughtness = 0;
+//                    outMat.map = texture1;
+//
+//                    outMat.envMap = textureCube;
+//                    outMat.side = THREE.DoubleSide;
+//                    outMat.transparent = true;
+//                    obj.children[i].children[0].material= outMat;
+
                 }
+
+
 
             }
             mesh.scale.set(scale,scale,scale);
@@ -335,6 +406,76 @@
             scene.add(mesh);
         });
 
+    }
+
+    function loadFBXModel(path)
+    {
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function( item, loaded, total ) {
+
+            console.log( item, loaded, total );
+
+        };
+
+        var onProgress = function( xhr ) {
+
+            if ( xhr.lengthComputable ) {
+
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+            }
+
+        };
+
+        var onError = function( xhr ) {
+
+            console.error( xhr );
+
+        };
+
+        var loader = new THREE.FBXLoader( manager );
+        loader.load( 'Model/' + path + '.fbx', function( object ) {
+            model = object;
+            console.log("**************************");
+            console.log(model instanceof THREE.Scene);
+            model.traverse( function ( child ) {
+                var name = child.name;
+                console.log(name);
+                if ( child instanceof THREE.Mesh ) {
+                    console.log(name);
+                    if(name.indexOf("R")>0) {
+                        var envMap = texture_loader.load('model/texture/hw_honor9_reflact.png');
+                        envMap.mapping = THREE.SphericalReflectionMapping;
+                        var mesh = new THREE.Mesh(child.geometry, new THREE.MeshPhongMaterial( { envMap: envMap, overdraw: 0.5 } ) );
+                        child.parent.add(mesh);
+                        // child.visible = false;
+                        child = mesh;
+                    }
+                    if(name.indexOf("C")>0) {
+                        child.material.map = texture_loader.load('Model/fbxscene/hw_honor9_color.png');
+                    }
+                    if(name.indexOf("N")>0) {
+                        child.material.normalMap = texture_loader.load('Model/fbxscene/hw_honor9_normal.png');
+                    }
+                    if(name.indexOf("S")>0) {
+                        child.material.specularMap = texture_loader.load('Model/fbxscene/hw_honor9_specular.png');
+                    }
+                    if(name == "HWhonor9_screen_geo") {
+                        child.material.color = new THREE.Color( 1, 1, 1 );
+                        child.material.map = texture_loader.load('UI/pic.jpg');
+                    }
+                    child.material.metalness = 1;
+                }
+            } );
+
+            model.scale.set(1,1,1);
+
+            model.position.set(0, 10, 0);
+
+            scene.add( model );
+
+        }, onProgress, onError );
     }
 
     function ChangeScene(id) {
